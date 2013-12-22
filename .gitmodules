@@ -1,0 +1,6 @@
+[submodule "bud"]
+	path = bud
+	url = git@github.com:indutny/bud
+[submodule "stud"]
+	path = stud
+	url = git@github.com:indutny/stud
