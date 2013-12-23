@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 pkgin -y update
-pkgin -y install scmgit gmake gcc47 apache-2.4
+pkgin -y install scmgit gmake gcc47
 git submodule update --init --recursive
 ./init.sh
 
