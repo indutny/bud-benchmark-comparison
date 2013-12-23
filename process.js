@@ -4,10 +4,7 @@ var fs = require('fs');
 var results = fs.readFileSync('./results.txt').toString();
 
 results = results.split(
-  'This is ApacheBench, Version 2.3 <$Revision: 1430300 $>\n' +
-  'Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/\n' +
-  'Licensed to The Apache Software Foundation, http://www.apache.org/\n\n' +
-  'Benchmarking 10.100.58.176 (be patient).....done\n\n\n'
+  'This is ApacheBench, Version 2.3 <$Revision: 1430300 $>\n'
 );
 
 // Skip first empty
@@ -26,6 +23,12 @@ results = results.map(function(result) {
     match = line.match(/Server Port:.*?(\d+)/);
     if (match !== null) {
       out.port = match[1] | 0;
+      return;
+    }
+
+    match = line.match(/Document Path:.*?([\w\/]+)/);
+    if (match !== null) {
+      out.path = match[1] | 0;
       return;
     }
 
@@ -79,7 +82,7 @@ pairs.forEach(function(pair) {
 
 console.log('c, bud-99p, bud-95p, stud-99p, stud-95p');
 pairs.forEach(function(pair) {
-  console.log('%d, %d, %d', pair.c,
+  console.log('%d, %d, %d, %d, %d', pair.c,
               pair.bud['99p'], pair.bud['95p'],
               pair.stud['99p'], pair.stud['95p']);
 });
