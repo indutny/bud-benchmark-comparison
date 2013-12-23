@@ -41,6 +41,12 @@ results = results.map(function(result) {
       return;
     }
 
+    match = line.match(/95%.*?(\d+)/);
+    if (match !== null) {
+      out['95p'] = match[1] | 0;
+      return;
+    }
+
     match = line.match(/99%.*?(\d+)/);
     if (match !== null) {
       out['99p'] = match[1] | 0;
@@ -71,7 +77,9 @@ pairs.forEach(function(pair) {
   console.log('%d, %d, %d', pair.c, pair.bud.rps, pair.stud.rps);
 });
 
-console.log('c, bud-99p, stud-99p');
+console.log('c, bud-99p, bud-95p, stud-99p, stud-95p');
 pairs.forEach(function(pair) {
-  console.log('%d, %d, %d', pair.c, pair.bud['99p'], pair.stud['99p']);
+  console.log('%d, %d, %d', pair.c,
+              pair.bud['99p'], pair.bud['95p'],
+              pair.stud['99p'], pair.stud['95p']);
 });
